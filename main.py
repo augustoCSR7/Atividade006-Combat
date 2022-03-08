@@ -11,6 +11,8 @@ while True:
 
     game.draw_sprites()
 
+    game.check_collision()
+
     pygame.display.update()
 
     clock.tick(config.fps)
