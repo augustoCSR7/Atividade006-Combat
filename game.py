@@ -1,5 +1,5 @@
 import pygame
-import ball
+import bullet
 import config
 import layouts
 import blue_tank
@@ -15,7 +15,7 @@ background = None
 walls = pygame.sprite.Group()
 
 # Ball group (to test collision)
-ball = pygame.sprite.GroupSingle(ball.Ball())
+bullet = pygame.sprite.GroupSingle(bullet.Bullet())
 
 # Players groups
 player1 = pygame.sprite.GroupSingle(blue_tank.Blue_tank())
@@ -56,7 +56,7 @@ def get_layout(layout_type):
 
 # Draws all the screen elements
 def draw_sprites():
-    global walls, background, ball
+    global walls, background, bullet
 
     # Fills the background
     screen.fill(background)
@@ -70,8 +70,8 @@ def draw_sprites():
     player2.draw(screen)
 
     # Shows the ball
-    ball.draw(screen)
-    ball.update()
+    bullet.draw(screen)
+    bullet.update()
 
     # Draw the walls
     walls.draw(screen)
@@ -79,24 +79,24 @@ def draw_sprites():
 
 # Check collision between the ball and a wall
 def check_collision():
-    global ball, walls
+    global bullet, walls
     # Get a list with all the collisions that happened
-    collision = pygame.sprite.spritecollide(ball.sprite,walls,False)
+    collision = pygame.sprite.spritecollide(bullet.sprite,walls,False)
 
     # If a collision happened, then
     if collision:
         # For wall that was colided
         for wall in collision:
             # Check the coordinates which colidded with the ball
-            bottom_collision = ball.sprite.rect.bottom - wall.rect.top
-            top_collision = wall.rect.bottom - ball.sprite.rect.top
-            right_collision = wall.rect.right - ball.sprite.rect.left
-            left_collision = ball.sprite.rect.right - wall.rect.left
+            bottom_collision = bullet.sprite.rect.bottom - wall.rect.top
+            top_collision = wall.rect.bottom - bullet.sprite.rect.top
+            right_collision = wall.rect.right - bullet.sprite.rect.left
+            left_collision = bullet.sprite.rect.right - wall.rect.left
 
             # Changes the ball direction by the position where it collided
             if bottom_collision <= 2 or top_collision <= 2:
-                ball.sprite.dy *= -1
+                bullet.sprite.dy *= -1
             
             if left_collision <= 2 or right_collision <= 2:
-                ball.sprite.dx *= -1
+                bullet.sprite.dx *= -1
             

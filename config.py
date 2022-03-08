@@ -4,6 +4,9 @@ import pygame
 screen_width = 800
 screen_height = 550
 
+# Bullet speed
+bullet_speed = 2
+
 #COLORS
 RED = (255,0,0)
 WHITE = (255,255,255)

@@ -1,15 +1,17 @@
+from random import choice
 import pygame
+import config
 
 
-class Ball(pygame.sprite.Sprite):
+class Bullet(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
 
-        self.image = pygame.Surface((10,10))
+        self.image = pygame.Surface((3,3))
         self.image.fill("black")
         self.rect = self.image.get_rect(center = (400,303))
 
-        self.dx = -2
+        self.dx = -2 
         self.dy = 2
 
     def movements(self):
