@@ -1,7 +1,7 @@
 import pygame
 
 
-class Bola(pygame.sprite.Sprite):
+class Ball(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
 

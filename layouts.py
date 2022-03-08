@@ -12,6 +12,13 @@ class Layouts:
 
         self.set_layout1()
         self.set_layout2()
+
+        if layout_type == 1:
+            self.wall_color = "#EE9A50"
+            self.bg_color = "#8A963B"
+        elif layout_type == 2:
+            self.wall_color = "#D8A93F"
+            self.bg_color = "#902608"
         
         for layout in self.layouts[layout_type-1]:
             self.group.add(wall.Wall(self.wall_color,layout[0],layout[1]))
@@ -32,8 +39,6 @@ class Layouts:
         self.group.add(wall.Wall(self.wall_color,(26,441),(787,303)))
 
     def set_layout1(self):
-        self.wall_color = "#EE9A50"
-        self.bg_color = "#8A963B"
 
         layout_temp = []
 
@@ -55,8 +60,6 @@ class Layouts:
         self.layouts.append(layout_temp)
 
     def set_layout2(self):
-        self.wall_color = "#D8A93F"
-        self.bg_color = "#902608"
 
         layout_temp = []
 
