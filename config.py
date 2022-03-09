@@ -34,6 +34,7 @@ RECT10 = (168, 10)
 #SPRITES
 BLUETANK = 'Sprites/tank2.png'
 REDTANK = 'Sprites/tank1.png'
+TESTBIRD = 'Sprites/bird.png'
 
 # Screen refreshs per second
 fps = 60

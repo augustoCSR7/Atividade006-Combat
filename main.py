@@ -12,6 +12,8 @@ while True:
     # Check is an event happens
     game.check_events()
 
+    game.pause_game()
+
     # Draws the elements on the screen
     game.draw_sprites()
 

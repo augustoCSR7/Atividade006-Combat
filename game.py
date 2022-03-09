@@ -25,19 +25,50 @@ player2 = pygame.sprite.GroupSingle(red_tank.Red_tank())
 pontos1 = 0
 pontos2 = 0
 font = pygame.font.Font('./font/Gamer.ttf',80)
+font2 = pygame.font.Font('./font/Gamer.ttf',50)
 Mens_pontos1 = f'{pontos1}'
 Mens_pontos1format = font.render(Mens_pontos1, False, config.GREEN)
 Mens_pontos2 = f'{pontos2}'
 Mens_pontos2format = font.render(Mens_pontos2, False, config.BLUE)
 
+pause = False
+
 
 # Check if an event happens
 def check_events():
+    global pause
     for event in pygame.event.get():
         # Check if the user wants to exit
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                pause = True
+
+
+def pause_game():
+    global pause
+    while pause:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    pause = False
+
+        screen.fill(background)
+
+        text = font.render("Paused", True, "White")
+        text_rect = text.get_rect(center=(config.screen_width / 2, 150))
+        screen.blit(text, (text_rect))
+
+        text = font2.render("Press 'esc' to resume game", True, "White")
+        text_rect = text.get_rect(center=(config.screen_width / 2, 350))
+        screen.blit(text, (text_rect))
+
+        pygame.display.update()
 
 
 # Gets the chosen layout
@@ -67,7 +98,9 @@ def draw_sprites():
 
     # Show players sprites
     player1.draw(screen)
+    player1.update()
     player2.draw(screen)
+    player2.update()
 
     # Shows the ball
     bullet.draw(screen)
