@@ -1,15 +1,15 @@
 import pygame
 
-#SCREEN CONFIG
+# SCREEN CONFIG
 screen_width = 800
 screen_height = 550
 
 # Bullet speed
 bullet_speed = 2
 
-#COLORS
-RED = (255,0,0)
-WHITE = (255,255,255)
+# COLORS
+RED = (255, 0, 0)
+WHITE = (255, 255, 255)
 GREEN = (0, 127, 33)
 BLUE = (0, 97, 148)
 
@@ -31,13 +31,40 @@ RECT8 = (30, 60)
 RECT9 = (20, 168)
 RECT10 = (168, 10)
 
-#SPRITES
-BLUETANK = 'Sprites/tank2.png'
-REDTANK = 'Sprites/tank1.png'
-TESTBIRD = 'Sprites/bird.png'
+# SPRITES
+
+# REDTANK = 'Sprites/tank1.png'
+# BLUETANK = 'Sprites/tank2.png'
+# TESTBIRD = 'Sprites/bird.png'
+
+BLUETANK = []
+REDTANK = []
+
+
+def red_tank_sprites_list():
+
+    count = 0
+
+    for i in range(24):
+        REDTANK.append(f'Sprites/tank rotations/tank1/tank1_{count}.png')
+        count = count + 15
+
+
+def blue_tank_sprites_list():
+
+    count = 0
+
+    for i in range(24):
+        BLUETANK.append(f'Sprites/tank rotations/tank2/tank2_{count}.png')
+        count = count + 15
+
+
+red_tank_sprites_list()
+blue_tank_sprites_list()
 
 # Screen refreshs per second
 fps = 60
+
 
 def initialize_screen():
     global font
