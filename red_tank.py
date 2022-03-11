@@ -1,3 +1,5 @@
+from random import randint
+import time
 import pygame
 from config import REDTANK
 
@@ -12,7 +14,7 @@ class Red_tank(pygame.sprite.Sprite):
     def player_input(self):
         keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_a]:
+        if keys[pygame.K_d]:
 
             self.sprite_model -= 1
 
@@ -22,7 +24,7 @@ class Red_tank(pygame.sprite.Sprite):
             self.image = pygame.image.load(REDTANK[self.sprite_model])
             self.rect = self.image.get_rect(center = self.rect.center)
 
-        if keys[pygame.K_d]:
+        if keys[pygame.K_a]:
 
             self.sprite_model += 1
 
@@ -172,8 +174,11 @@ class Red_tank(pygame.sprite.Sprite):
                 self.rect.x -= 1
                 self.rect.y += 3
 
-
-
     def update(self):
         self.player_input()
         self.mask = pygame.mask.from_surface(self.image)
+
+    
+    def death(self):
+        new_coordinates = (randint(41,759), randint(100,509))
+        self.rect.center = new_coordinates

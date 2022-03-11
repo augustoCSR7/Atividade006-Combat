@@ -1,5 +1,6 @@
 import pygame
 from config import BLUETANK
+from random import randint
 
 
 class Blue_tank(pygame.sprite.Sprite):
@@ -8,9 +9,7 @@ class Blue_tank(pygame.sprite.Sprite):
         self.image = pygame.image.load(BLUETANK[6])
         self.rect = self.image.get_rect(center=(700, 300))
         self.sprite_model = 6
-        self.bx = - 3
-        self.by = 0
-
+        
     def player_input(self):
         keys = pygame.key.get_pressed()
 
@@ -177,3 +176,7 @@ class Blue_tank(pygame.sprite.Sprite):
     def update(self):
         self.player_input()
         self.mask = pygame.mask.from_surface(self.image)
+
+    def death(self):
+        new_coordinates = (randint(41,759), randint(100,509))
+        self.rect.center = new_coordinates

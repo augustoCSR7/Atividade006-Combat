@@ -20,6 +20,8 @@ while True:
     # Check collision between the ball and a wall
     game.check_collision()
 
+    game.check_bullet_tank_collision()
+
     pygame.display.update()
 
     clock.tick(config.fps)

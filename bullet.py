@@ -1,4 +1,3 @@
-from random import choice
 import pygame
 import config
 
@@ -24,6 +23,7 @@ class Bullet(pygame.sprite.Sprite):
     def update(self):
         self.movements()
         self.check_death()
+        self.mask = pygame.mask.from_surface(self.image)
 
     def check_death(self):
         if  pygame.time.get_ticks() >= self.death_time:
@@ -67,7 +67,7 @@ class Bullet(pygame.sprite.Sprite):
             self.dy = 3 * 2
             self.dx = -1 * 2
         elif self.sprite_model == 12:
-            self.dy = -3 * 2
+            self.dy = 3 * 2
             self.dx = 0 * 2
         elif self.sprite_model == 13:
             self.dy = 3 * 2

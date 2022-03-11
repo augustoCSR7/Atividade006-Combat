@@ -190,3 +190,14 @@ def shot_bullet(player):
 
         p2_bullet.add(bullet.Bullet(model,coordinates,"#9D4844"))
 
+
+def check_bullet_tank_collision():
+    collision = pygame.sprite.spritecollide(player1.sprite,p2_bullet,True,pygame.sprite.collide_mask)
+
+    if collision:
+        player1.sprite.death()
+
+    collision = pygame.sprite.spritecollide(player2.sprite,p1_bullet,True,pygame.sprite.collide_mask)
+
+    if collision:
+        player2.sprite.death()
