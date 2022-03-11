@@ -6,7 +6,7 @@ import config
 clock = pygame.time.Clock()
 
 # Get the layout chosen by the user
-game.get_layout(1)
+game.get_layout(2)
 
 while True:
     # Check is an event happens
@@ -17,10 +17,8 @@ while True:
     # Draws the elements on the screen
     game.draw_sprites()
 
-    # Check collision between the ball and a wall
-    game.check_collision()
-
-    game.check_bullet_tank_collision()
+    # Check collisions
+    game.check_collisions()
 
     pygame.display.update()
 
