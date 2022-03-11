@@ -33,7 +33,7 @@ class Layouts:
 
     def rectangle(self):
         self.group.add(wall.Wall(self.wall_color,(800,20),(400,70)))
-        self.group.add(wall.Wall(self.wall_color,(800,20),(400,537)))
+        self.group.add(wall.Wall(self.wall_color,(800,22),(400,538)))
 
         self.group.add(wall.Wall(self.wall_color,(20,447),(7,303)))
         self.group.add(wall.Wall(self.wall_color,(20,447),(793,303)))
