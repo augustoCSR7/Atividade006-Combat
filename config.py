@@ -4,9 +4,6 @@ import pygame
 screen_width = 800
 screen_height = 550
 
-# Bullet speed
-bullet_speed = 2
-
 # COLORS
 RED = (255, 0, 0)
 WHITE = (255, 255, 255)
@@ -64,6 +61,9 @@ blue_tank_sprites_list()
 
 # Screen refreshs per second
 fps = 60
+
+# Bullet Screen time in ms
+bullet_on_screen = 4000
 
 
 def initialize_screen():
