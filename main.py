@@ -6,7 +6,7 @@ import config
 clock = pygame.time.Clock()
 
 # Get the layout chosen by the user
-game.get_layout(2)
+game.get_layout(1)
 
 while True:
     # Check is an event happens

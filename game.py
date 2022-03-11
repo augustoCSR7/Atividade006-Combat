@@ -221,13 +221,13 @@ def bullet_tank_collision():
 
     if collision:
         player1.sprite.death()
-        update_score(2)
+        update_score(1)
 
     collision = pygame.sprite.spritecollide(player2.sprite,p1_bullet,True,pygame.sprite.collide_mask)
 
     if collision:
         player2.sprite.death()
-        update_score(1)
+        update_score(2)
 
 
 
