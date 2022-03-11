@@ -30,11 +30,27 @@ pontos2 = 0
 font = pygame.font.Font('./font/Gamer.ttf',80)
 font2 = pygame.font.Font('./font/Gamer.ttf',50)
 Mens_pontos1 = f'{pontos1}'
-Mens_pontos1format = font.render(Mens_pontos1, False, config.GREEN)
+Mens_pontos1format = font.render(Mens_pontos1, False, "#9D4844")
 Mens_pontos2 = f'{pontos2}'
 Mens_pontos2format = font.render(Mens_pontos2, False, config.BLUE)
 
 pause = False
+
+def update_score(player):
+
+    if player == 1:
+        global pontos1, Mens_pontos1, Mens_pontos1format
+        pontos1 += 1
+
+        Mens_pontos1 = f'{pontos1}'
+        Mens_pontos1format = font.render(Mens_pontos1, False, "#9D4844")
+
+    if player == 2:
+        global pontos2, Mens_pontos2, Mens_pontos2format
+        pontos2 += 1
+
+        Mens_pontos2 = f'{pontos2}'
+        Mens_pontos2format = font.render(Mens_pontos2, False, config.BLUE)
 
 
 # Check if an event happens
@@ -196,8 +212,10 @@ def check_bullet_tank_collision():
 
     if collision:
         player1.sprite.death()
+        update_score(2)
 
     collision = pygame.sprite.spritecollide(player2.sprite,p1_bullet,True,pygame.sprite.collide_mask)
 
     if collision:
         player2.sprite.death()
+        update_score(1)
