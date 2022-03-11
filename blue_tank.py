@@ -6,8 +6,13 @@ from random import randint
 class Blue_tank(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load(BLUETANK[6])
+        self.image = pygame.image.load(BLUETANK[6]).convert_alpha()
+        width = self.image.get_width() // 1.2
+        height = self.image.get_height() // 1.2
+        self.image = pygame.transform.scale(self.image,(width,height)).convert_alpha()
+
         self.rect = self.image.get_rect(center=(700, 300))
+
         self.sprite_model = 6
         
     def player_input(self):
@@ -20,7 +25,10 @@ class Blue_tank(pygame.sprite.Sprite):
             if self.sprite_model < 0:
                 self.sprite_model = 23
 
-            self.image = pygame.image.load(BLUETANK[self.sprite_model])
+            self.image = pygame.image.load(BLUETANK[self.sprite_model]).convert_alpha()
+            width = self.image.get_width() // 1.2
+            height = self.image.get_height() // 1.2
+            self.image = pygame.transform.scale(self.image,(width,height)).convert_alpha()
             self.rect = self.image.get_rect(center=self.rect.center)
 
         if keys[pygame.K_LEFT]:
@@ -30,7 +38,10 @@ class Blue_tank(pygame.sprite.Sprite):
             if self.sprite_model > 23:
                 self.sprite_model = 0
 
-            self.image = pygame.image.load(BLUETANK[self.sprite_model])
+            self.image = pygame.image.load(BLUETANK[self.sprite_model]).convert_alpha()
+            width = self.image.get_width() // 1.2
+            height = self.image.get_height() // 1.2
+            self.image = pygame.transform.scale(self.image,(width,height)).convert_alpha()
             self.rect = self.image.get_rect(center=self.rect.center)
 
         if keys[pygame.K_UP]:

@@ -32,11 +32,11 @@ class Layouts:
         return self.bg_color
 
     def rectangle(self):
-        self.group.add(wall.Wall(self.wall_color,(800,26),(400,70)))
-        self.group.add(wall.Wall(self.wall_color,(800,26),(400,537)))
+        self.group.add(wall.Wall(self.wall_color,(800,20),(400,70)))
+        self.group.add(wall.Wall(self.wall_color,(800,20),(400,537)))
 
-        self.group.add(wall.Wall(self.wall_color,(26,441),(13,303)))
-        self.group.add(wall.Wall(self.wall_color,(26,441),(787,303)))
+        self.group.add(wall.Wall(self.wall_color,(20,447),(7,303)))
+        self.group.add(wall.Wall(self.wall_color,(20,447),(793,303)))
 
     def set_layout1(self):
 
@@ -66,8 +66,8 @@ class Layouts:
         layout_temp.append([config.RECT9,(650,303)])
         layout_temp.append([config.RECT9,(150,303)])
 
-        layout_temp.append([config.RECT4,(400, 509)])
-        layout_temp.append([config.RECT4,(400, 98)])
+        layout_temp.append([config.RECT4,(400, 512)])
+        layout_temp.append([config.RECT4,(400, 95)])
 
         layout_temp.append([config.RECT1,(670,229)])
         layout_temp.append([config.RECT1,(670,377)])
@@ -75,24 +75,24 @@ class Layouts:
         layout_temp.append([config.RECT1,(130,229)])
         layout_temp.append([config.RECT1,(130,377)])
 
-        layout_temp.append([config.RECT1,(291,407)])
+        layout_temp.append([config.RECT1,(291,410)])
         layout_temp.append([config.RECT2,(311,427)])
 
-        layout_temp.append([config.RECT1,(509,407)])
+        layout_temp.append([config.RECT1,(509,410)])
         layout_temp.append([config.RECT2,(489,427)])
 
-        layout_temp.append([config.RECT1,(291,199)])
+        layout_temp.append([config.RECT1,(291,197)])
         layout_temp.append([config.RECT2,(311,179)])
 
-        layout_temp.append([config.RECT1,(509,199)])
+        layout_temp.append([config.RECT1,(509,197)])
         layout_temp.append([config.RECT2,(489,179)])
 
-        layout_temp.append([config.RECT4,(225,303)])
-        layout_temp.append([config.RECT4,(565,303)])
+        layout_temp.append([config.RECT4,(230,303)])
+        layout_temp.append([config.RECT4,(560,303)])
 
-        layout_temp.append([config.RECT2,(180,131)])
-        layout_temp.append([config.RECT2,(620,131)])
-        layout_temp.append([config.RECT2,(180,466)])
-        layout_temp.append([config.RECT2,(620,466)])
+        layout_temp.append([config.RECT2,(180,137)])
+        layout_temp.append([config.RECT2,(620,137)])
+        layout_temp.append([config.RECT2,(180,460)])
+        layout_temp.append([config.RECT2,(620,460)])
 
         self.layouts.append(layout_temp)

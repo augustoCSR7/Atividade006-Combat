@@ -7,7 +7,10 @@ from config import REDTANK
 class Red_tank(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load(REDTANK[18])
+        self.image = pygame.image.load(REDTANK[18]).convert_alpha()
+        width = self.image.get_width() // 1.2
+        height = self.image.get_height() // 1.2
+        self.image = pygame.transform.scale(self.image,(width,height)).convert_alpha()
         self.rect = self.image.get_rect(center=(100, 300))
         self.sprite_model = 18
 
@@ -21,7 +24,10 @@ class Red_tank(pygame.sprite.Sprite):
             if self.sprite_model < 0:
                 self.sprite_model = 23
 
-            self.image = pygame.image.load(REDTANK[self.sprite_model])
+            self.image = pygame.image.load(REDTANK[self.sprite_model]).convert_alpha()
+            width = self.image.get_width() // 1.2
+            height = self.image.get_height() // 1.2
+            self.image = pygame.transform.scale(self.image,(width,height)).convert_alpha()
             self.rect = self.image.get_rect(center = self.rect.center)
 
         if keys[pygame.K_a]:
@@ -31,7 +37,10 @@ class Red_tank(pygame.sprite.Sprite):
             if self.sprite_model > 23:
                 self.sprite_model = 0
 
-            self.image = pygame.image.load(REDTANK[self.sprite_model])
+            self.image = pygame.image.load(REDTANK[self.sprite_model]).convert_alpha()
+            width = self.image.get_width() // 1.2
+            height = self.image.get_height() // 1.2
+            self.image = pygame.transform.scale(self.image,(width,height)).convert_alpha()
             self.rect = self.image.get_rect(center=self.rect.center)
 
         if keys[pygame.K_w]:
