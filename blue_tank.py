@@ -1,4 +1,5 @@
 import pygame
+import game
 from config import BLUETANK
 from random import randint
 
@@ -48,6 +49,9 @@ class Blue_tank(pygame.sprite.Sprite):
             self.rect = self.image.get_rect(center=self.rect.center)
 
         if keys[pygame.K_UP]:
+            previous_x = self.rect.x
+            previous_y = self.rect.y
+
             if self.sprite_model == 0:
                 self.rect.y -= 3
             elif self.sprite_model == 1:
@@ -116,8 +120,15 @@ class Blue_tank(pygame.sprite.Sprite):
             elif self.sprite_model == 23:
                 self.rect.x += 1
                 self.rect.y -= 3
+            
+            if pygame.sprite.collide_rect(self,game.player2.sprite):
+                self.rect.x = previous_x
+                self.rect.y = previous_y
 
         if keys[pygame.K_DOWN]:
+            previous_x = self.rect.x
+            previous_y = self.rect.y
+
             if self.sprite_model == 0:
                 self.rect.y += 3
             elif self.sprite_model == 1:
@@ -186,6 +197,10 @@ class Blue_tank(pygame.sprite.Sprite):
             elif self.sprite_model == 23:
                 self.rect.x -= 1
                 self.rect.y += 3
+            
+            if pygame.sprite.collide_rect(self,game.player2.sprite):
+                self.rect.x = previous_x
+                self.rect.y = previous_y
 
     def update(self):
         self.player_input()
@@ -195,3 +210,4 @@ class Blue_tank(pygame.sprite.Sprite):
     def death(self):
         new_coordinates = (randint(41,759), randint(100,509))
         self.rect.center = new_coordinates
+

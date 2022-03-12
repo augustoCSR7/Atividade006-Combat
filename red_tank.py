@@ -1,5 +1,5 @@
 from random import randint
-import time
+import game
 import pygame
 from config import REDTANK
 
@@ -49,6 +49,9 @@ class Red_tank(pygame.sprite.Sprite):
             self.rect = self.image.get_rect(center=self.rect.center)
 
         if keys[pygame.K_w]:
+            previous_x = self.rect.x
+            previous_y = self.rect.y
+
             if self.sprite_model == 0:
                 self.rect.y -= 3
             elif self.sprite_model == 1:
@@ -118,7 +121,14 @@ class Red_tank(pygame.sprite.Sprite):
                 self.rect.x += 1
                 self.rect.y -= 3
 
+            if pygame.sprite.collide_rect(self,game.player1.sprite):
+                self.rect.x = previous_x
+                self.rect.y = previous_y
+
         if keys[pygame.K_s]:
+            previous_x = self.rect.x
+            previous_y = self.rect.y
+
             if self.sprite_model == 0:
                 self.rect.y += 3
             elif self.sprite_model == 1:
@@ -187,6 +197,10 @@ class Red_tank(pygame.sprite.Sprite):
             elif self.sprite_model == 23:
                 self.rect.x -= 1
                 self.rect.y += 3
+
+            if pygame.sprite.collide_rect(self,game.player1.sprite):
+                self.rect.x = previous_x
+                self.rect.y = previous_y
 
     def update(self):
         self.player_input()

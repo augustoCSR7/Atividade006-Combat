@@ -78,3 +78,6 @@ def initialize_screen():
 
 def collide_hit_rect(one , two):
     return one.hit_rect.colliderect(two.rect)
+
+def collide_hit_rects(one, two):
+    return one.hit_rect.colliderect(two.hit_rect)
