@@ -8,10 +8,15 @@ class Red_tank(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.image = pygame.image.load(REDTANK[18]).convert_alpha()
+
         width = self.image.get_width() // 1.2
         height = self.image.get_height() // 1.2
         self.image = pygame.transform.scale(self.image,(width,height)).convert_alpha()
+
         self.rect = self.image.get_rect(center=(100, 300))
+        self.hit_rect = pygame.Rect(0,0,35,35)
+        self.hit_rect.center = self.rect.center
+
         self.sprite_model = 18
 
     def player_input(self):
@@ -186,6 +191,7 @@ class Red_tank(pygame.sprite.Sprite):
     def update(self):
         self.player_input()
         self.mask = pygame.mask.from_surface(self.image)
+        self.hit_rect.center = self.rect.center
 
     
     def death(self):

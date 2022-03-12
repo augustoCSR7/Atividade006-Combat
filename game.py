@@ -232,50 +232,58 @@ def bullet_tank_collision():
 
 
 def tank_wall_collision():
-    collision = pygame.sprite.spritecollide(player1.sprite,walls,False,pygame.sprite.collide_rect)
+    collision = pygame.sprite.spritecollide(player1.sprite,walls,False,config.collide_hit_rect)
 
     if collision:
+
         for wall in collision:
             # Check the coordinates which colidded with the ball
-                bottom_collision = player1.sprite.rect.bottom - wall.rect.top
-                top_collision = wall.rect.bottom - player1.sprite.rect.top
-                right_collision = wall.rect.right - player1.sprite.rect.left
-                left_collision= player1.sprite.rect.right - wall.rect.left
+            bottom_collision = player1.sprite.hit_rect.bottom - wall.rect.top
+            top_collision = wall.rect.bottom - player1.sprite.hit_rect.top
+            right_collision = wall.rect.right - player1.sprite.hit_rect.left
+            left_collision= player1.sprite.hit_rect.right - wall.rect.left
 
-                # Changes the ball direction by the position where it collided
-                if bottom_collision <= 6:
-                    player1.sprite.rect.bottom = wall.rect.top - 6
-                    
-                if top_collision <= 6:
-                    player1.sprite.rect.top = wall.rect.bottom + 6
+            
+
+            # Changes the ball direction by the position where it collided
+            if bottom_collision <= 6:
+                player1.sprite.hit_rect.bottom = wall.rect.top - 3
                 
-                if left_collision <= 6:
-                    player1.sprite.rect.right = wall.rect.left - 6
-                    
-                if right_collision <= 6:
-                    player1.sprite.rect.left = wall.rect.right + 6
+            if top_collision <= 6:
+                player1.sprite.hit_rect.top = wall.rect.bottom + 3
+            
+            if left_collision <= 6:
+                player1.sprite.hit_rect.right = wall.rect.left - 3
+                
+            if right_collision <= 6:
+                player1.sprite.hit_rect.left = wall.rect.right + 3
+            
+            player1.sprite.rect.center = player1.sprite.hit_rect.center
 
-    collision = pygame.sprite.spritecollide(player2.sprite,walls,False,pygame.sprite.collide_rect)
+    collision = pygame.sprite.spritecollide(player2.sprite,walls,False,config.collide_hit_rect)
 
     if collision:
         
         for wall in collision:
             # Check the coordinates which colidded with the ball
-                bottom_collision = player2.sprite.rect.bottom - wall.rect.top
-                top_collision = wall.rect.bottom - player2.sprite.rect.top
-                right_collision = wall.rect.right - player2.sprite.rect.left
-                left_collision= player2.sprite.rect.right - wall.rect.left
+            bottom_collision = player2.sprite.hit_rect.bottom - wall.rect.top
+            top_collision = wall.rect.bottom - player2.sprite.hit_rect.top
+            right_collision = wall.rect.right - player2.sprite.hit_rect.left
+            left_collision= player2.sprite.hit_rect.right - wall.rect.left
 
+            
 
-                # Changes the ball direction by the position where it collided
-                if bottom_collision <= 6:
-                    player2.sprite.rect.bottom = wall.rect.top - 6
-                    
-                if top_collision <= 6:
-                    player2.sprite.rect.top = wall.rect.bottom + 6
+            # Changes the ball direction by the position where it collided
+            if bottom_collision <= 6:
+                player2.sprite.hit_rect.bottom = wall.rect.top - 3
                 
-                if left_collision <= 6:
-                    player2.sprite.rect.right = wall.rect.left - 6
-                    
-                if right_collision <= 6:
-                    player2.sprite.rect.left = wall.rect.right + 6
+            if top_collision <= 6:
+                player2.sprite.hit_rect.top = wall.rect.bottom + 3
+            
+            if left_collision <= 6:
+                player2.sprite.hit_rect.right = wall.rect.left - 3
+                
+            if right_collision <= 6:
+                player2.sprite.hit_rect.left = wall.rect.right + 3
+            
+            player2.sprite.rect.center = player2.sprite.hit_rect.center
