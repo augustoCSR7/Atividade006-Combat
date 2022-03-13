@@ -44,8 +44,8 @@ $ python main.py
 | Escolher layout  |<img src="Sprites/keys/keys_150.png" width="50px" alt="game controls">|
 
 #### Jogando 🕹️
-|  Movimento \ Player | 1 | 2 |
-|:-------------------:|:-:|:-:|
+|         Ação        | Player 1 | Player 2 |
+|:-------------------:|:--------:|:--------:|
 |  Andar para frente  |<img src="Sprites/keys/keys_060.png" width="50px" alt="game controls">|<img src="Sprites/keys/keys_070.png" width="50px" alt="game controls">|
 |   Andar para trás   |<img src="Sprites/keys/keys_061.png" width="50px" alt="game controls">|<img src="Sprites/keys/keys_082.png" width="50px" alt="game controls">|
 | Girar para esquerda |<img src="Sprites/keys/keys_059.png" width="50px" alt="game controls">|<img src="Sprites/keys/keys_072.png" width="50px" alt="game controls">|
@@ -111,4 +111,4 @@ Para saber mais sobre como fazer um pull request, consulte a documentação do G
 
 Esse projeto está sob a licença `MIT`. Veja o arquivo [LICENÇA](LICENSE) para mais detalhes.
 
-[⬆ Voltar ao topo](#space-mission)<br>
+[⬆ Voltar ao topo](#Combat)<br>
