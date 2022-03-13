@@ -66,6 +66,8 @@ fps = 60
 bullet_on_screen = 4000
 
 
+number_of_layouts = 2
+
 def initialize_screen():
     global font
 

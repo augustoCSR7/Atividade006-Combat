@@ -1,3 +1,4 @@
+from re import I
 import pygame
 import wall
 import config

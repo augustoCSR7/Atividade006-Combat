@@ -11,11 +11,12 @@ screen = config.initialize_screen()
 # Defining the background color variable
 background = None
 
+level_select = True
+
+level_number = 1
+
 # Wall group
 walls = pygame.sprite.Group()
-
-# Ball group (to test collision)
-# bullet = pygame.sprite.GroupSingle(bullet.Bullet())
 
 # Players groups
 player1 = pygame.sprite.GroupSingle(blue_tank.Blue_tank())
@@ -57,7 +58,7 @@ def update_score(player):
 
 # Check if an event happens
 def check_events():
-    global pause
+    global pause, level_select, level_number
     for event in pygame.event.get():
         # Check if the user wants to exit
         if event.type == pygame.QUIT:
@@ -65,16 +66,49 @@ def check_events():
             exit()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                pause = True
+                if level_select is not True:
+                    pause = True
 
             if event.key == pygame.K_RCTRL:
                 shot_bullet(1)
             if event.key == pygame.K_LSHIFT:
                 shot_bullet(2)
+            
+            if event.key == pygame.K_SPACE:
+                if level_select is True:
+                    level_select = False
+            
+            if level_select is True:
+                if event.key == pygame.K_LEFT:
+                    level_number -= 1
+                    if level_number < 1: 
+                        level_number = config.number_of_layouts
+                    get_layout(level_number)
 
+                if event.key == pygame.K_RIGHT:
+                    level_number += 1
+                    if level_number > config.number_of_layouts:
+                        level_number = 1
+                    get_layout(level_number)
+
+
+def reset_game():
+    global player1,player2,pontos1,pontos2
+    global Mens_pontos1, Mens_pontos1format
+    global Mens_pontos2, Mens_pontos2format
+
+    player1.add(blue_tank.Blue_tank())
+    player2.add(red_tank.Red_tank())
+
+    pontos1 = 0
+    pontos2 = 0
+    Mens_pontos1 = f'{pontos1}'
+    Mens_pontos1format = font.render(Mens_pontos1, False, "#9D4844")
+    Mens_pontos2 = f'{pontos2}'
+    Mens_pontos2format = font.render(Mens_pontos2, False, config.BLUE)
 
 def pause_game():
-    global pause
+    global pause, level_select
     while pause:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -83,6 +117,10 @@ def pause_game():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     pause = False
+                if event.key == pygame.K_SPACE:
+                    pause = False
+                    level_select = True
+                    reset_game()
 
         screen.fill(background)
 
@@ -92,6 +130,10 @@ def pause_game():
 
         text = font2.render("Press 'esc' to resume game", True, "White")
         text_rect = text.get_rect(center=(config.screen_width / 2, 350))
+        screen.blit(text, (text_rect))
+
+        text = font2.render("Press 'space' to select another level", True, "White")
+        text_rect = text.get_rect(center=(config.screen_width / 2, 400))
         screen.blit(text, (text_rect))
 
         pygame.display.update()
@@ -113,28 +155,33 @@ def get_layout(layout_type):
 
 # Draws all the screen elements
 def draw_sprites():
-    global walls, background, bullet
+    global walls, background, level_number
 
     # Fills the background
     screen.fill(background)
 
-    # Shows Score
-    screen.blit(Mens_pontos1format,(250,-15))
-    screen.blit(Mens_pontos2format,(550,-15))
+    if level_select is not True:
+        # Shows Score
+        screen.blit(Mens_pontos1format,(250,-15))
+        screen.blit(Mens_pontos2format,(550,-15))
 
-    # Shows the bullets
-    p1_bullet.draw(screen)
-    p2_bullet.draw(screen)
+        # Shows the bullets
+        p1_bullet.draw(screen)
+        p2_bullet.draw(screen)
 
-    p1_bullet.update()
-    p2_bullet.update()
+        p1_bullet.update()
+        p2_bullet.update()
 
-    # Show players sprites
-    player1.draw(screen)
-    player1.update()
+        # Show players sprites
+        player1.draw(screen)
+        player1.update()
 
-    player2.draw(screen)
-    player2.update()
+        player2.draw(screen)
+        player2.update()
+    else:
+        level_text = f'{level_number}'
+        level_text_on_screen = font.render(level_text, False, config.BLUE)
+        screen.blit(level_text_on_screen,(250,-15))
 
     # Draw the walls
     walls.draw(screen)
