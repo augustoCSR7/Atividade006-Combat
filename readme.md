@@ -52,6 +52,7 @@ $ python main.py
 |  Girar para direita |<img src="Sprites/keys/keys_058.png" width="50px" alt="game controls">|<img src="Sprites/keys/keys_083.png" width="50px" alt="game controls">|
 |        Atirar       |<img src="Sprites/keys/keys_001.png" width="50px" alt="game controls">|<img src="Sprites/keys/keys_002.png" width="50px" alt="game controls">|
 |        Pausar       |<img src="Sprites/keys/keys_011.png" width="50px" alt="game controls">|<img src="Sprites/keys/keys_011.png" width="50px" alt="game controls">
+|       Resetar       |<img src="Sprites/keys/keys_074.png" width="50px" alt="game controls">|<img src="Sprites/keys/keys_074.png" width="50px" alt="game controls">
 
 
 ## Como contribuir? 🤔

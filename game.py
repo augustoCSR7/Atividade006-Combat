@@ -65,20 +65,11 @@ def check_events():
             pygame.quit()
             exit()
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
-                if level_select is not True:
-                    pause = True
-
-            if event.key == pygame.K_RCTRL:
-                shot_bullet(1)
-            if event.key == pygame.K_LSHIFT:
-                shot_bullet(2)
-            
-            if event.key == pygame.K_SPACE:
-                if level_select is True:
-                    level_select = False
             
             if level_select is True:
+                if event.key == pygame.K_SPACE:
+                    level_select = False
+
                 if event.key == pygame.K_LEFT:
                     level_number -= 1
                     if level_number < 1: 
@@ -90,6 +81,17 @@ def check_events():
                     if level_number > config.number_of_layouts:
                         level_number = 1
                     get_layout(level_number)
+            else:
+                if event.key == pygame.K_ESCAPE:
+                        pause = True
+
+                if event.key == pygame.K_RCTRL:
+                    shot_bullet(1)
+                if event.key == pygame.K_LSHIFT:
+                    shot_bullet(2)
+
+                if event.key == pygame.K_r:
+                    reset_game()
 
 
 def reset_game():
