@@ -35,6 +35,15 @@ $ python main.py
 ## Jogabilidade 👾
 
 ### Controles  🎮
+
+#### Seleção de layout 🧮
+
+|       Ação       | Tecla |
+|:----------------:|:-----:|
+| Alternar layouts |<img src="Sprites/keys/keys_059.png" width="50px" alt="game controls"> <img src="Sprites/keys/keys_058.png" width="50px" alt="game controls">|
+| Escolher layout  |<img src="Sprites/keys/keys_150.png" width="50px" alt="game controls">|
+
+#### Jogando 🕹️
 |  Movimento \ Player | 1 | 2 |
 |:-------------------:|:-:|:-:|
 |  Andar para frente  |<img src="Sprites/keys/keys_060.png" width="50px" alt="game controls">|<img src="Sprites/keys/keys_070.png" width="50px" alt="game controls">|
