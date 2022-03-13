@@ -17,9 +17,13 @@ class Red_tank(pygame.sprite.Sprite):
         self.hit_rect = pygame.Rect(0,0,35,35)
         self.hit_rect.center = self.rect.center
 
+        self.dead = False
+        self.cont = 0
+
         self.sprite_model = 18
 
     def player_input(self):
+        
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_d]:
@@ -203,11 +207,41 @@ class Red_tank(pygame.sprite.Sprite):
                 self.rect.y = previous_y
 
     def update(self):
-        self.player_input()
+
         self.mask = pygame.mask.from_surface(self.image)
         self.hit_rect.center = self.rect.center
+
+        if self.dead is True:
+            self.spin()
+            self.cont += 1
+
+            if self.cont == 100:
+                self.cont = 0
+                self.dead = False
+        elif game.player1.sprite.dead is not True:
+            self.player_input()
 
     
     def death(self):
         new_coordinates = (randint(41,759), randint(100,509))
         self.rect.center = new_coordinates
+        self.dead = True
+        game.tank_wall_collision()
+
+        if pygame.sprite.collide_rect(self,game.player1.sprite):
+            new_coordinates = (randint(41,759), randint(100,509))
+            self.rect.center = new_coordinates
+            game.tank_wall_collision()
+
+    def spin(self):
+        self.sprite_model += 1
+
+        if self.sprite_model > 23:
+            self.sprite_model = 0
+
+        self.image = pygame.image.load(REDTANK[self.sprite_model]).convert_alpha()
+        width = self.image.get_width() // 1.2
+        height = self.image.get_height() // 1.2
+        self.image = pygame.transform.scale(self.image,(width,height)).convert_alpha()
+        self.rect = self.image.get_rect(center=self.rect.center)
+            
