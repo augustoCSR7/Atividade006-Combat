@@ -1,6 +1,7 @@
 from random import randint
 import game
 import pygame
+import config
 from config import REDTANK
 
 
@@ -212,6 +213,13 @@ class Red_tank(pygame.sprite.Sprite):
         self.hit_rect.center = self.rect.center
 
         if self.dead is True:
+
+            if pygame.sprite.spritecollide(self,game.walls, 
+            False,config.collide_hit_rect) or pygame.sprite.collide_rect(self, game.player1.sprite):
+                new_coordinates = (randint(41,759), randint(100,509))
+                self.hit_rect.center = new_coordinates
+                self.rect.center = self.hit_rect.center
+
             self.spin()
             self.cont += 1
 
@@ -231,7 +239,6 @@ class Red_tank(pygame.sprite.Sprite):
         if pygame.sprite.collide_rect(self,game.player1.sprite):
             new_coordinates = (randint(41,759), randint(100,509))
             self.rect.center = new_coordinates
-            game.tank_wall_collision()
 
     def spin(self):
         self.sprite_model += 1
