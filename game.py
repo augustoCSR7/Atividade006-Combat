@@ -13,7 +13,13 @@ background = None
 
 level_select = True
 
+game_stop = False
+
 level_number = 1
+
+start_time = 0
+end_time = 0
+remaining_time = 0
 
 # Wall group
 walls = pygame.sprite.Group()
@@ -59,6 +65,11 @@ def update_score(player):
 # Check if an event happens
 def check_events():
     global pause, level_select, level_number
+    global start_time, end_time, remaining_time, game_stop
+
+    if end_time - pygame.time.get_ticks() < 0:
+        game_stop = True
+
     for event in pygame.event.get():
         # Check if the user wants to exit
         if event.type == pygame.QUIT:
@@ -69,6 +80,10 @@ def check_events():
             if level_select is True:
                 if event.key == pygame.K_SPACE:
                     level_select = False
+                    game_stop = False
+
+                    start_time = pygame.time.get_ticks()
+                    end_time = start_time + config.game_time
 
                 if event.key == pygame.K_LEFT:
                     level_number -= 1
@@ -84,6 +99,7 @@ def check_events():
             else:
                 if event.key == pygame.K_ESCAPE:
                         pause = True
+                        remaining_time = end_time - pygame.time.get_ticks()
 
                 if event.key == pygame.K_RCTRL:
                     shot_bullet(1)
@@ -110,7 +126,8 @@ def reset_game():
     Mens_pontos2format = font.render(Mens_pontos2, False, config.BLUE)
 
 def pause_game():
-    global pause, level_select
+    global pause, level_select, start_time
+    global remaining_time, end_time
     while pause:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -119,6 +136,9 @@ def pause_game():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     pause = False
+                    start_time = pygame.time.get_ticks()
+                    end_time = start_time + remaining_time
+
                 if event.key == pygame.K_SPACE:
                     pause = False
                     level_select = True
@@ -157,7 +177,7 @@ def get_layout(layout_type):
 
 # Draws all the screen elements
 def draw_sprites():
-    global walls, background, level_number
+    global walls, background, level_number,game_stop
 
     # Fills the background
     screen.fill(background)
@@ -171,15 +191,18 @@ def draw_sprites():
         p1_bullet.draw(screen)
         p2_bullet.draw(screen)
 
-        p1_bullet.update()
-        p2_bullet.update()
-
         # Show players sprites
         player1.draw(screen)
-        player1.update()
 
         player2.draw(screen)
-        player2.update()
+        
+        if game_stop is not True:
+            p1_bullet.update()
+            p2_bullet.update()
+            player1.update()
+            player2.update()
+            
+
     else:
         level_text = f'{level_number}'
         level_text_on_screen = font.render(level_text, False, config.BLUE)

@@ -28,6 +28,9 @@ RECT8 = (30, 60)
 RECT9 = (20, 168)
 RECT10 = (168, 10)
 
+# Game time in ms
+game_time = 140000 # é 140000 ms
+
 # SPRITES
 
 # REDTANK = 'Sprites/tank1.png'
@@ -74,7 +77,7 @@ def initialize_screen():
     pygame.init()
 
     screen = pygame.display.set_mode((screen_width, screen_height))
-    pygame.display.set_caption("Combat")
+    pygame.display.set_caption("Combat: Tank-Pong")
 
     return screen
 
