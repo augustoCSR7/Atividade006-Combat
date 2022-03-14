@@ -1,5 +1,0 @@
-matiz = 39		vermelho = 240
-sat = 165		verde = 238
-lum = 195		azul = 174
-
-30x10
