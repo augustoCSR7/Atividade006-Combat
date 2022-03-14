@@ -1,3 +1,4 @@
+import black
 import pygame
 import bullet
 import config
@@ -26,13 +27,13 @@ tank_walk = pygame.mixer.Sound("sound/tank_move.mp3")
 tank_walk.set_volume(0.1)
 
 tank_shot = pygame.mixer.Sound("sound/tank_shot.mp3")
-tank_shot.set_volume(0.1)
+tank_shot.set_volume(0.3)
 
 tank_death = pygame.mixer.Sound("sound/tank_death.mp3")
-tank_death.set_volume(0.1)
+tank_death.set_volume(0.5)
 
 bullet_collision = pygame.mixer.Sound("sound/bullet_sound.mp3")
-bullet_collision.set_volume(0.1)
+bullet_collision.set_volume(0.3)
 
 # Wall group
 walls = pygame.sprite.Group()
@@ -127,6 +128,7 @@ def reset_game():
     global player1, player2, pontos1, pontos2
     global Mens_pontos1, Mens_pontos1format
     global Mens_pontos2, Mens_pontos2format
+    global game_stop, start_time, end_time
 
     player1.add(blue_tank.BlueTank())
     player2.add(red_tank.RedTank())
@@ -137,6 +139,11 @@ def reset_game():
     Mens_pontos1format = font.render(Mens_pontos1, False, "#9D4844")
     Mens_pontos2 = f'{pontos2}'
     Mens_pontos2format = font.render(Mens_pontos2, False, config.BLUE)
+
+    game_stop = False
+
+    start_time = pygame.time.get_ticks()
+    end_time = start_time + config.game_time
 
 
 def pause_game():
@@ -209,7 +216,7 @@ def draw_sprites():
         player1.draw(screen)
 
         player2.draw(screen)
-
+        
         if game_stop is not True:
             p1_bullet.update()
             p2_bullet.update()
