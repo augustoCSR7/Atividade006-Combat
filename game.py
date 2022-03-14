@@ -5,7 +5,7 @@ import layouts
 import blue_tank
 import red_tank
 
-# Initializinh screen
+# Initializing screen
 screen = config.initialize_screen()
 
 # Defining the background color variable
@@ -21,21 +21,34 @@ start_time = 0
 end_time = 0
 remaining_time = 0
 
+# Sounds
+tank_walk = pygame.mixer.Sound("sound/tank_move.mp3")
+tank_walk.set_volume(0.1)
+
+tank_shot = pygame.mixer.Sound("sound/tank_shot.mp3")
+tank_shot.set_volume(0.1)
+
+tank_death = pygame.mixer.Sound("sound/tank_death.mp3")
+tank_death.set_volume(0.1)
+
+bullet_collision = pygame.mixer.Sound("sound/bullet_sound.mp3")
+bullet_collision.set_volume(0.1)
+
 # Wall group
 walls = pygame.sprite.Group()
 
-# Players groups
-player1 = pygame.sprite.GroupSingle(blue_tank.Blue_tank())
-player2 = pygame.sprite.GroupSingle(red_tank.Red_tank())
+# Player groups
+player1 = pygame.sprite.GroupSingle(blue_tank.BlueTank())
+player2 = pygame.sprite.GroupSingle(red_tank.RedTank())
 
 p1_bullet = pygame.sprite.GroupSingle()
 p2_bullet = pygame.sprite.GroupSingle()
 
-# Players Scores
+# Players score
 pontos1 = 0
 pontos2 = 0
-font = pygame.font.Font('./font/Gamer.ttf',80)
-font2 = pygame.font.Font('./font/Gamer.ttf',50)
+font = pygame.font.Font('./font/Gamer.ttf', 80)
+font2 = pygame.font.Font('./font/Gamer.ttf', 50)
 Mens_pontos1 = f'{pontos1}'
 Mens_pontos1format = font.render(Mens_pontos1, False, "#9D4844")
 Mens_pontos2 = f'{pontos2}'
@@ -45,8 +58,8 @@ pygame.sprite.collide_rect_ratio(0.3)
 
 pause = False
 
-def update_score(player):
 
+def update_score(player):
     if player == 1:
         global pontos1, Mens_pontos1, Mens_pontos1format
         pontos1 += 1
@@ -76,7 +89,7 @@ def check_events():
             pygame.quit()
             exit()
         if event.type == pygame.KEYDOWN:
-            
+
             if level_select is True:
                 if event.key == pygame.K_SPACE:
                     level_select = False
@@ -87,7 +100,7 @@ def check_events():
 
                 if event.key == pygame.K_LEFT:
                     level_number -= 1
-                    if level_number < 1: 
+                    if level_number < 1:
                         level_number = config.number_of_layouts
                     get_layout(level_number)
 
@@ -98,8 +111,8 @@ def check_events():
                     get_layout(level_number)
             else:
                 if event.key == pygame.K_ESCAPE:
-                        pause = True
-                        remaining_time = end_time - pygame.time.get_ticks()
+                    pause = True
+                    remaining_time = end_time - pygame.time.get_ticks()
 
                 if event.key == pygame.K_RCTRL:
                     shot_bullet(1)
@@ -111,12 +124,12 @@ def check_events():
 
 
 def reset_game():
-    global player1,player2,pontos1,pontos2
+    global player1, player2, pontos1, pontos2
     global Mens_pontos1, Mens_pontos1format
     global Mens_pontos2, Mens_pontos2format
 
-    player1.add(blue_tank.Blue_tank())
-    player2.add(red_tank.Red_tank())
+    player1.add(blue_tank.BlueTank())
+    player2.add(red_tank.RedTank())
 
     pontos1 = 0
     pontos2 = 0
@@ -124,6 +137,7 @@ def reset_game():
     Mens_pontos1format = font.render(Mens_pontos1, False, "#9D4844")
     Mens_pontos2 = f'{pontos2}'
     Mens_pontos2format = font.render(Mens_pontos2, False, config.BLUE)
+
 
 def pause_game():
     global pause, level_select, start_time
@@ -148,15 +162,15 @@ def pause_game():
 
         text = font.render("Paused", True, "White")
         text_rect = text.get_rect(center=(config.screen_width / 2, 150))
-        screen.blit(text, (text_rect))
+        screen.blit(text, text_rect)
 
         text = font2.render("Press 'esc' to resume game", True, "White")
         text_rect = text.get_rect(center=(config.screen_width / 2, 350))
-        screen.blit(text, (text_rect))
+        screen.blit(text, text_rect)
 
         text = font2.render("Press 'space' to select another level", True, "White")
         text_rect = text.get_rect(center=(config.screen_width / 2, 400))
-        screen.blit(text, (text_rect))
+        screen.blit(text, text_rect)
 
         pygame.display.update()
 
@@ -177,15 +191,15 @@ def get_layout(layout_type):
 
 # Draws all the screen elements
 def draw_sprites():
-    global walls, background, level_number,game_stop
+    global walls, background, level_number, game_stop
 
     # Fills the background
     screen.fill(background)
 
     if level_select is not True:
         # Shows Score
-        screen.blit(Mens_pontos1format,(250,-15))
-        screen.blit(Mens_pontos2format,(550,-15))
+        screen.blit(Mens_pontos1format, (250, -15))
+        screen.blit(Mens_pontos2format, (550, -15))
 
         # Shows the bullets
         p1_bullet.draw(screen)
@@ -195,21 +209,21 @@ def draw_sprites():
         player1.draw(screen)
 
         player2.draw(screen)
-        
+
         if game_stop is not True:
             p1_bullet.update()
             p2_bullet.update()
             player1.update()
             player2.update()
-            
 
     else:
         level_text = f'{level_number}'
-        level_text_on_screen = font.render(level_text, False, config.BLUE)
-        screen.blit(level_text_on_screen,(250,-15))
+        level_text_on_screen = font.render(level_text, False, config.GREEN)
+        screen.blit(level_text_on_screen, (250, -15))
 
     # Draw the walls
     walls.draw(screen)
+
 
 def check_collisions():
     bullet_wall_collision()
@@ -221,141 +235,144 @@ def check_collisions():
 
 # Check collision between the ball and a wall
 def bullet_wall_collision():
-    global p1_bullet,p2_bullet, walls
+    global p1_bullet, p2_bullet, walls
 
     if len(p1_bullet.sprites()) != 0:
         # Get a list with all the collisions that happened
-        collision = pygame.sprite.spritecollide(p1_bullet.sprite,walls,False)
+        collision = pygame.sprite.spritecollide(p1_bullet.sprite, walls, False)
 
         # If a collision happened, then
         if collision:
-            # For wall that was colided
+            bullet_collision.play()
+
+            # For wall that was collided
             for wall in collision:
-                # Check the coordinates which colidded with the ball
+                # Check the coordinates which collided with the ball
                 bottom_collision = p1_bullet.sprite.rect.bottom - wall.rect.top
                 top_collision = wall.rect.bottom - p1_bullet.sprite.rect.top
                 right_collision = wall.rect.right - p1_bullet.sprite.rect.left
                 left_collision = p1_bullet.sprite.rect.right - wall.rect.left
 
-                player_x = p1_bullet.sprite.dx if p1_bullet.sprite.dx >=0 else -1 * p1_bullet.sprite.dx
-                player_y = p1_bullet.sprite.dy if p1_bullet.sprite.dy >=0 else -1 * p1_bullet.sprite.dy
+                player_x = p1_bullet.sprite.dx if p1_bullet.sprite.dx >= 0 else -1 * p1_bullet.sprite.dx
+                player_y = p1_bullet.sprite.dy if p1_bullet.sprite.dy >= 0 else -1 * p1_bullet.sprite.dy
 
                 # Changes the ball direction by the position where it collided
                 if bottom_collision <= player_y or top_collision <= player_y:
                     p1_bullet.sprite.dy *= -1
-                
+
                 if left_collision <= player_x or right_collision <= player_x:
                     p1_bullet.sprite.dx *= -1
-        
+
     if len(p2_bullet.sprites()) != 0:
         # Get a list with all the collisions that happened
-        collision = pygame.sprite.spritecollide(p2_bullet.sprite,walls,False)
+        collision = pygame.sprite.spritecollide(p2_bullet.sprite, walls, False)
 
         # If a collision happened, then
         if collision:
-            # For wall that was colided
+            bullet_collision.play()
+
+            # For wall that was collided
             for wall in collision:
-                # Check the coordinates which colidded with the ball
+                # Check the coordinates which collided with the ball
                 bottom_collision = p2_bullet.sprite.rect.bottom - wall.rect.top
                 top_collision = wall.rect.bottom - p2_bullet.sprite.rect.top
                 right_collision = wall.rect.right - p2_bullet.sprite.rect.left
                 left_collision = p2_bullet.sprite.rect.right - wall.rect.left
 
-                player_x = p2_bullet.sprite.dx if p2_bullet.sprite.dx >=0 else -1 * p2_bullet.sprite.dx
-                player_y = p2_bullet.sprite.dy if p2_bullet.sprite.dy >=0 else -1 * p2_bullet.sprite.dy
+                player_x = p2_bullet.sprite.dx if p2_bullet.sprite.dx >= 0 else -1 * p2_bullet.sprite.dx
+                player_y = p2_bullet.sprite.dy if p2_bullet.sprite.dy >= 0 else -1 * p2_bullet.sprite.dy
 
                 # Changes the ball direction by the position where it collided
                 if bottom_collision <= player_y or top_collision <= player_y:
                     p2_bullet.sprite.dy *= -1
-                
+
                 if left_collision <= player_x or right_collision <= player_x:
                     p2_bullet.sprite.dx *= -1
 
 
 def shot_bullet(player):
-    global p1_bullet, p2_bullet
+    global p1_bullet, p2_bullet, tank_shot
 
     if player == 1 and len(p1_bullet.sprites()) == 0:
         model = player1.sprite.sprite_model
         coordinates = player1.sprite.rect.center
 
-        p1_bullet.add(bullet.Bullet(model,coordinates,"#537AD7"))
+        p1_bullet.add(bullet.Bullet(model, coordinates, "#537AD7"))
+        tank_shot.play()
 
     elif player == 2 and len(p2_bullet.sprites()) == 0:
         model = player2.sprite.sprite_model
         coordinates = player2.sprite.rect.center
 
-        p2_bullet.add(bullet.Bullet(model,coordinates,"#9D4844"))
+        p2_bullet.add(bullet.Bullet(model, coordinates, "#9D4844"))
+        tank_shot.play()
 
 
 def bullet_tank_collision():
-    collision = pygame.sprite.spritecollide(player1.sprite,p2_bullet,True,pygame.sprite.collide_mask)
+    collision = pygame.sprite.spritecollide(player1.sprite, p2_bullet, True, pygame.sprite.collide_mask)
 
     if collision:
         player1.sprite.death()
+        tank_death.play()
         update_score(1)
 
-    collision = pygame.sprite.spritecollide(player2.sprite,p1_bullet,True,pygame.sprite.collide_mask)
+    collision = pygame.sprite.spritecollide(player2.sprite, p1_bullet, True, pygame.sprite.collide_mask)
 
     if collision:
         player2.sprite.death()
+        tank_death.play()
         update_score(2)
 
 
-
 def tank_wall_collision():
-    collision = pygame.sprite.spritecollide(player1.sprite,walls,False,config.collide_hit_rect)
+    collision = pygame.sprite.spritecollide(player1.sprite, walls, False, config.collide_hit_rect)
 
     if collision:
 
         for wall in collision:
-            # Check the coordinates which colidded with the ball
+            # Check the coordinates which collided with the ball
             bottom_collision = player1.sprite.hit_rect.bottom - wall.rect.top
             top_collision = wall.rect.bottom - player1.sprite.hit_rect.top
             right_collision = wall.rect.right - player1.sprite.hit_rect.left
-            left_collision= player1.sprite.hit_rect.right - wall.rect.left
-
-            
+            left_collision = player1.sprite.hit_rect.right - wall.rect.left
 
             # Changes the ball direction by the position where it collided
             if bottom_collision <= 6:
                 player1.sprite.hit_rect.bottom = wall.rect.top - 3
-                
+
             if top_collision <= 6:
                 player1.sprite.hit_rect.top = wall.rect.bottom + 3
-            
+
             if left_collision <= 6:
                 player1.sprite.hit_rect.right = wall.rect.left - 3
-                
+
             if right_collision <= 6:
                 player1.sprite.hit_rect.left = wall.rect.right + 3
-            
+
             player1.sprite.rect.center = player1.sprite.hit_rect.center
 
-    collision = pygame.sprite.spritecollide(player2.sprite,walls,False,config.collide_hit_rect)
+    collision = pygame.sprite.spritecollide(player2.sprite, walls, False, config.collide_hit_rect)
 
     if collision:
-        
+
         for wall in collision:
-            # Check the coordinates which colidded with the ball
+            # Check the coordinates which collided with the ball
             bottom_collision = player2.sprite.hit_rect.bottom - wall.rect.top
             top_collision = wall.rect.bottom - player2.sprite.hit_rect.top
             right_collision = wall.rect.right - player2.sprite.hit_rect.left
-            left_collision= player2.sprite.hit_rect.right - wall.rect.left
-
-            
+            left_collision = player2.sprite.hit_rect.right - wall.rect.left
 
             # Changes the ball direction by the position where it collided
             if bottom_collision <= 6:
                 player2.sprite.hit_rect.bottom = wall.rect.top - 3
-                
+
             if top_collision <= 6:
                 player2.sprite.hit_rect.top = wall.rect.bottom + 3
-            
+
             if left_collision <= 6:
                 player2.sprite.hit_rect.right = wall.rect.left - 3
-                
+
             if right_collision <= 6:
                 player2.sprite.hit_rect.left = wall.rect.right + 3
-            
+
             player2.sprite.rect.center = player2.sprite.hit_rect.center

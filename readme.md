@@ -38,21 +38,21 @@ $ python main.py
 
 #### Seleção de layout 🧮
 
-|       Ação       | Tecla |
-|:----------------:|:-----:|
-| Alternar layouts |<img src="Sprites/keys/keys_059.png" width="50px" alt="game controls"> <img src="Sprites/keys/keys_058.png" width="50px" alt="game controls">|
-| Escolher layout  |<img src="Sprites/keys/keys_150.png" width="50px" alt="game controls">|
+|       Ação       |                                                                 Tecla                                                                 |
+|:----------------:|:-------------------------------------------------------------------------------------------------------------------------------------:|
+| Alternar layouts | <img src="img/keys/keys_059.png" width="50px" alt="game controls"> <img src="img/keys/keys_058.png" width="50px" alt="game controls"> |
+| Escolher layout  |                                  <img src="img/keys/keys_150.png" width="50px" alt="game controls">                                   |
 
 #### Jogando 🕹️
-|         Ação        | Player 1 | Player 2 |
-|:-------------------:|:--------:|:--------:|
-|  Andar para frente  |<img src="Sprites/keys/keys_060.png" width="50px" alt="game controls">|<img src="Sprites/keys/keys_070.png" width="50px" alt="game controls">|
-|   Andar para trás   |<img src="Sprites/keys/keys_061.png" width="50px" alt="game controls">|<img src="Sprites/keys/keys_082.png" width="50px" alt="game controls">|
-| Girar para esquerda |<img src="Sprites/keys/keys_059.png" width="50px" alt="game controls">|<img src="Sprites/keys/keys_072.png" width="50px" alt="game controls">|
-|  Girar para direita |<img src="Sprites/keys/keys_058.png" width="50px" alt="game controls">|<img src="Sprites/keys/keys_083.png" width="50px" alt="game controls">|
-|        Atirar       |<img src="Sprites/keys/keys_001.png" width="50px" alt="game controls">|<img src="Sprites/keys/keys_002.png" width="50px" alt="game controls">|
-|        Pausar       |<img src="Sprites/keys/keys_011.png" width="50px" alt="game controls">|<img src="Sprites/keys/keys_011.png" width="50px" alt="game controls">
-|       Resetar       |<img src="Sprites/keys/keys_074.png" width="50px" alt="game controls">|<img src="Sprites/keys/keys_074.png" width="50px" alt="game controls">
+|         Ação        |                              Player 1                              |                              Player 2                              |
+|:-------------------:|:------------------------------------------------------------------:|:------------------------------------------------------------------:|
+|  Andar para frente  | <img src="img/keys/keys_060.png" width="50px" alt="game controls"> | <img src="img/keys/keys_070.png" width="50px" alt="game controls"> |
+|   Andar para trás   | <img src="img/keys/keys_061.png" width="50px" alt="game controls"> | <img src="img/keys/keys_082.png" width="50px" alt="game controls"> |
+| Girar para esquerda | <img src="img/keys/keys_059.png" width="50px" alt="game controls"> | <img src="img/keys/keys_072.png" width="50px" alt="game controls"> |
+|  Girar para direita | <img src="img/keys/keys_058.png" width="50px" alt="game controls"> | <img src="img/keys/keys_083.png" width="50px" alt="game controls"> |
+|        Atirar       | <img src="img/keys/keys_001.png" width="50px" alt="game controls"> | <img src="img/keys/keys_002.png" width="50px" alt="game controls"> |
+|        Pausar       | <img src="img/keys/keys_011.png" width="50px" alt="game controls"> | <img src="img/keys/keys_011.png" width="50px" alt="game controls">  
+|       Resetar       | <img src="img/keys/keys_074.png" width="50px" alt="game controls"> | <img src="img/keys/keys_074.png" width="50px" alt="game controls">  
 
 
 ## Como contribuir? 🤔

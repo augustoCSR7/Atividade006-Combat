@@ -3,14 +3,19 @@ import config
 
 
 class Bullet(pygame.sprite.Sprite):
-    def __init__(self,sprite_model, coordinates,color):
+    def __init__(self, sprite_model, coordinates, color):
         super().__init__()
 
-        self.image = pygame.Surface((5,5))
+        self.image = pygame.Surface((5, 5))
         self.image.fill(color)
-        self.rect = self.image.get_rect(center = coordinates)
+        self.rect = self.image.get_rect(center=coordinates)
+
+        self.mask = pygame.mask.from_surface(self.image)
 
         self.sprite_model = sprite_model
+
+        self.dx = 0
+        self.dy = 0
 
         self.set_direction()
 
@@ -26,7 +31,7 @@ class Bullet(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
 
     def check_death(self):
-        if  pygame.time.get_ticks() >= self.death_time:
+        if pygame.time.get_ticks() >= self.death_time:
             self.kill()
 
     def set_direction(self):
