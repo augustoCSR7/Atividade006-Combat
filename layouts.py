@@ -5,27 +5,18 @@ import config
 
 # Class that saves the pre-built layouts
 class Layouts:
-    layouts = []
 
     def __init__(self, layout_type: int):
         self.group = pygame.sprite.Group()
         self.wall_color = None
         self.bg_color = None
+        
+        self.layouts = []
 
-        self.set_layout1()
-        self.set_layout2()
+        self.define_layout1()
+        self.define_layout2()
 
-        if layout_type == 1:
-            self.wall_color = "#EE9A50"
-            self.bg_color = "#8A963B"
-        elif layout_type == 2:
-            self.wall_color = "#D8A93F"
-            self.bg_color = "#902608"
-
-        for layout in self.layouts[layout_type - 1]:
-            self.group.add(wall.Wall(self.wall_color, layout[0], layout[1]))
-
-        self.rectangle()
+        self.set_layout(layout_type)
 
     def get_group(self):
         return self.group
@@ -40,7 +31,7 @@ class Layouts:
         self.group.add(wall.Wall(self.wall_color, (20, 447), (7, 303)))
         self.group.add(wall.Wall(self.wall_color, (20, 447), (793, 303)))
 
-    def set_layout1(self):
+    def define_layout1(self):
 
         layout_temp = [[config.RECT7, (500, 308)], [config.RECT7, (300, 308)], [config.RECT8, (400, 203)],
                        [config.RECT8, (400, 403)], [config.RECT5, (650, 303)], [config.RECT5, (150, 303)],
@@ -49,7 +40,7 @@ class Layouts:
 
         self.layouts.append(layout_temp)
 
-    def set_layout2(self):
+    def define_layout2(self):
 
         layout_temp = [[config.RECT9, (650, 303)], [config.RECT9, (150, 303)], [config.RECT4, (400, 512)],
                        [config.RECT4, (400, 95)], [config.RECT1, (670, 229)], [config.RECT1, (670, 377)],
@@ -61,3 +52,19 @@ class Layouts:
                        [config.RECT2, (620, 460)]]
 
         self.layouts.append(layout_temp)
+
+    def set_layout(self,layout_type):
+
+        self.group.empty()
+
+        if layout_type == 1:
+            self.wall_color = "#EE9A50"
+            self.bg_color = "#8A963B"
+        elif layout_type == 2:
+            self.wall_color = "#D8A93F"
+            self.bg_color = "#902608"
+
+        for layout in self.layouts[layout_type - 1]:
+            self.group.add(wall.Wall(self.wall_color, layout[0], layout[1]))
+
+        self.rectangle()

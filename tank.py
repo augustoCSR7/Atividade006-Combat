@@ -1,5 +1,5 @@
 import pygame
-import game
+ #import game
 import config
 from random import randint
 
@@ -82,7 +82,7 @@ class Tank(pygame.sprite.Sprite):
 
         # Moves the tank if the key is up or down
         if pressed_keys[self.keys["up"]] or pressed_keys[self.keys["down"]]:
-            game.tank_walk.play()
+            config.tank_walk.play()
 
             previous_x = self.rect.x
             previous_y = self.rect.y
@@ -196,9 +196,9 @@ class Tank(pygame.sprite.Sprite):
         self.dead = True
 
     # Spin the tank
-    def spin(self):
+    def spin(self, walls : pygame.sprite.Group):
         # Checks if the tank has collided with a wall or the other, to change coordinates
-        if pygame.sprite.spritecollide(self, game.walls, False, config
+        if pygame.sprite.spritecollide(self, walls, False, config
         .collide_hit_rect):
             self.death()
 

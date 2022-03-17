@@ -39,6 +39,11 @@ bullet_on_screen = 4000
 # Number of layouts on the game
 number_of_layouts = 2
 
+# Defining the fonts
+pygame.font.init()
+font1 = pygame.font.Font('./font/Gamer.ttf', 80)
+font2 = pygame.font.Font('./font/Gamer.ttf', 50)
+
 # SPRITES
 BLUE_TANK = []
 RED_TANK = []
