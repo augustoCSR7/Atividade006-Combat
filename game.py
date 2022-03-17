@@ -1,10 +1,8 @@
-import black
 import pygame
 import bullet
 import config
 import layouts
-import blue_tank
-import red_tank
+import tank
 
 # Initializing screen
 screen = config.initialize_screen()
@@ -39,8 +37,8 @@ bullet_collision.set_volume(0.3)
 walls = pygame.sprite.Group()
 
 # Player groups
-player1 = pygame.sprite.GroupSingle(blue_tank.BlueTank())
-player2 = pygame.sprite.GroupSingle(red_tank.RedTank())
+player1 = pygame.sprite.GroupSingle(tank.Tank(1))
+player2 = pygame.sprite.GroupSingle(tank.Tank(2))
 
 p1_bullet = pygame.sprite.GroupSingle()
 p2_bullet = pygame.sprite.GroupSingle()
@@ -130,8 +128,8 @@ def reset_game():
     global Mens_pontos2, Mens_pontos2format
     global game_stop, start_time, end_time
 
-    player1.add(blue_tank.BlueTank())
-    player2.add(red_tank.RedTank())
+    player1.add(tank.Tank(1))
+    player2.add(tank.Tank(2))
 
     pontos1 = 0
     pontos2 = 0
