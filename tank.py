@@ -242,9 +242,7 @@ class Tank(pygame.sprite.Sprite):
                 "left": pygame.K_a,
                 "right": pygame.K_d
             }
-    
 
     def go_to_previous_coordinates(self):
         self.rect.x = self.previous_x
         self.rect.y = self.previous_y
-
