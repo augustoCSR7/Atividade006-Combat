@@ -1,28 +1,33 @@
-import game
 import pygame
 import config
+import game
 
-# Clock instance to limit the updates per second
-clock = pygame.time.Clock()
 
-# Gets the first layout
-game.get_layout(1)
+# import bullet
 
-while True:
-    # Check is an event happens
-    game.check_events()
+class Main:
+    def __init__(self) -> None:
+        pygame.init()
 
-    # Check if the game is paused
-    game.pause_game()
+        self.clock = pygame.time.Clock()
 
-    # Draws the elements on the screen
-    game.draw_sprites()
+        self.screen = config.initialize_screen()
 
-    # Check collisions
-    game.check_collisions()
+        self.game = game.Game()
 
-    # Update the pygame display
-    pygame.display.update()
+        self.game_loop()
 
-    # Defines the amount of refreshes per second
-    clock.tick(config.fps)
+    def game_loop(self):
+        while True:
+            self.game.check_events()
+
+            self.game.draw_elements(self.screen)
+
+            self.game.check_collisions()
+
+            pygame.display.update()
+
+            self.clock.tick(config.fps)
+
+
+Main()

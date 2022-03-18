@@ -1,18 +1,19 @@
 import pygame
- #import game
+# import game
 import config
 from random import randint
 
 
 class Tank(pygame.sprite.Sprite):
-    def __init__(self, tank_type : int):
+    def __init__(self, tank_type: int):
         super().__init__()
 
         self.tank_type = tank_type
 
         if tank_type == 1:
             # Sets the first image and resizes it to 0.8 its size
-            self.image = pygame.image.load(config.BLUE_TANK[6]).convert_alpha()
+            self.tank_sprites = config.BLUE_TANK
+            self.image = pygame.image.load(self.tank_sprites[6]).convert_alpha()
             self.resize_tank()
 
             # Sets the sprite rect based on the image size
@@ -23,7 +24,8 @@ class Tank(pygame.sprite.Sprite):
 
         elif tank_type == 2:
             # Sets the first image and resizes it to 0.8 its size
-            self.image = pygame.image.load(config.RED_TANK[18]).convert_alpha()
+            self.tank_sprites = config.RED_TANK
+            self.image = pygame.image.load(self.tank_sprites[18]).convert_alpha()
             self.resize_tank()
 
             # Sets the sprite rect based on the image size
@@ -35,6 +37,11 @@ class Tank(pygame.sprite.Sprite):
         # sets the keys for movement depending on the tank_type
         self.keys = dict()
         self.set_movement_keys(tank_type)
+
+        # Sets the previous coordinates to 
+        # check collision between tanks
+        self.previous_x = self.rect.x
+        self.previous_y = self.rect.y
 
         # Creates a "hit rect" to deal with wall collision
         # and set its center as the rect center
@@ -69,13 +76,10 @@ class Tank(pygame.sprite.Sprite):
                 if self.sprite_model > 23:
                     self.sprite_model = 0
 
-            if self.tank_type == 1:
-                self.image = pygame.image.load(config.BLUE_TANK[self.sprite_model]).convert_alpha()
-            else:
-                self.image = pygame.image.load(config.RED_TANK[self.sprite_model]).convert_alpha()
+            self.image = pygame.image.load(self.tank_sprites[self.sprite_model]).convert_alpha()
 
             self.resize_tank()
-            self.rect = self.image.get_rect(center = self.rect.center)
+            self.rect = self.image.get_rect(center=self.rect.center)
 
             # Updates the mask with the actual image on screen
             self.update_mask()
@@ -84,8 +88,8 @@ class Tank(pygame.sprite.Sprite):
         if pressed_keys[self.keys["up"]] or pressed_keys[self.keys["down"]]:
             config.tank_walk.play()
 
-            previous_x = self.rect.x
-            previous_y = self.rect.y
+            self.previous_x = self.rect.x
+            self.previous_y = self.rect.y
 
             add_x = 0
             add_y = 0
@@ -162,7 +166,7 @@ class Tank(pygame.sprite.Sprite):
             if pressed_keys[self.keys["down"]]:
                 add_x *= -1
                 add_y *= -1
-            
+
             self.rect.x += add_x
             self.rect.y += add_y
 
@@ -182,7 +186,6 @@ class Tank(pygame.sprite.Sprite):
         else:
             self.player_input()
 
-
     def update_mask(self):
         self.mask = pygame.mask.from_surface(self.image)
 
@@ -196,11 +199,7 @@ class Tank(pygame.sprite.Sprite):
         self.dead = True
 
     # Spin the tank
-    def spin(self, walls : pygame.sprite.Group):
-        # Checks if the tank has collided with a wall or the other, to change coordinates
-        if pygame.sprite.spritecollide(self, walls, False, config
-        .collide_hit_rect):
-            self.death()
+    def spin(self):
 
         self.sprite_model += 1
 
@@ -211,7 +210,7 @@ class Tank(pygame.sprite.Sprite):
             self.image = pygame.image.load(config.BLUE_TANK[self.sprite_model]).convert_alpha()
         else:
             self.image = pygame.image.load(config.RED_TANK[self.sprite_model]).convert_alpha()
-            
+
         self.resize_tank()
         self.rect = self.image.get_rect(center=self.rect.center)
         self.update_mask()
@@ -223,14 +222,12 @@ class Tank(pygame.sprite.Sprite):
             self.cont = 0
             self.dead = False
 
-
     def resize_tank(self):
         width = self.image.get_width() // 1.2
         height = self.image.get_height() // 1.2
         self.image = pygame.transform.scale(self.image, (width, height)).convert_alpha()
 
-
-    def set_movement_keys(self,tank_type):
+    def set_movement_keys(self, tank_type):
         if tank_type == 1:
             self.keys = {
                 "up": pygame.K_UP,
@@ -245,3 +242,9 @@ class Tank(pygame.sprite.Sprite):
                 "left": pygame.K_a,
                 "right": pygame.K_d
             }
+    
+
+    def go_to_previous_coordinates(self):
+        self.rect.x = self.previous_x
+        self.rect.y = self.previous_y
+

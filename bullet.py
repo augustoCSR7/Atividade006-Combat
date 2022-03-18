@@ -107,3 +107,29 @@ class Bullet(pygame.sprite.Sprite):
         elif self.sprite_model == 23:
             self.dy = -3 * 2
             self.dx = 1 * 2
+
+    def check_collision(self, walls: pygame.sprite.Group):
+        # Get a list with all the collisions that happened
+        collision = pygame.sprite.spritecollide(self, walls, False)
+
+        # If a collision happened, then
+        if collision:
+            config.bullet_collision.play()
+
+            # For wall that was collided
+            for wall in collision:
+                # Check the coordinates which collided with the ball
+                bottom_collision = self.rect.bottom - wall.rect.top
+                top_collision = wall.rect.bottom - self.rect.top
+                right_collision = wall.rect.right - self.rect.left
+                left_collision = self.rect.right - wall.rect.left
+
+                player_x = self.dx if self.dx >= 0 else -1 * self.dx
+                player_y = self.dy if self.dy >= 0 else -1 * self.dy
+
+                # Changes the ball direction by the position where it collided
+                if bottom_collision <= player_y or top_collision <= player_y:
+                    self.dy *= -1
+
+                if left_collision <= player_x or right_collision <= player_x:
+                    self.dx *= -1

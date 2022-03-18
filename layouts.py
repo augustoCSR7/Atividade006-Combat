@@ -10,7 +10,7 @@ class Layouts:
         self.group = pygame.sprite.Group()
         self.wall_color = None
         self.bg_color = None
-        
+
         self.layouts = []
 
         self.define_layout1()
@@ -53,7 +53,7 @@ class Layouts:
 
         self.layouts.append(layout_temp)
 
-    def set_layout(self,layout_type):
+    def set_layout(self, layout_type):
 
         self.group.empty()
 

@@ -72,6 +72,7 @@ def red_tank_sprites_list():
         RED_TANK.append(f'img/tank rotations/tank1/tank1_{count}.png')
         count = count + 15
 
+
 # Saves the sprites' location on the lists
 def blue_tank_sprites_list():
     count = 0
