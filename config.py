@@ -8,7 +8,7 @@ BLUE = (0, 97, 148)
 # Rect size constants
 # used: 1, 2, 4, 5, 7, 8, 9
 RECT1 = (20, 20)
-
+#sdsd
 RECT2 = (60, 15)
 RECT3 = (20, 60)
 
